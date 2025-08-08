@@ -1,3 +1,4 @@
+# build.gradle.kts (FINAL VERSION)
 plugins {
     id("java")
     id("org.jetbrains.intellij") version "1.13.3"
@@ -11,21 +12,17 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 intellij {
     version.set("2022.3")
-    type.set("IC") // IntelliJ Community - more stable than PS
+    type.set("IC")
     plugins.set(listOf("Git4Idea"))
 }
 
 tasks {
-    wrapper {
-        gradleVersion = "7.6"
-    }
-
     patchPluginXml {
         sinceBuild.set("223")
         untilBuild.set("233.*")
@@ -37,6 +34,6 @@ tasks {
     }
 
     compileJava {
-        options.release.set(11)
+        options.release.set(17)
     }
 }
