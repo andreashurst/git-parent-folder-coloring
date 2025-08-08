@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.15.0"
+    id("org.jetbrains.intellij") version "1.13.3"
 }
 
 group = "com.example"
@@ -10,38 +10,33 @@ repositories {
     mavenCentral()
 }
 
-// Configure Gradle IntelliJ Plugin
-intellij {
-    version.set("2023.1.5")
-    type.set("PS") // PhpStorm
-    plugins.set(listOf("Git4Idea"))
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+intellij {
+    version.set("2022.3")
+    type.set("IC") // IntelliJ Community - more stable than PS
+    plugins.set(listOf("Git4Idea"))
 }
 
 tasks {
     wrapper {
-        gradleVersion = "8.4"
+        gradleVersion = "7.6"
     }
 
     patchPluginXml {
+        sinceBuild.set("223")
+        untilBuild.set("233.*")
         version.set(project.version.toString())
-        sinceBuild.set("231")
-        untilBuild.set("241.*")
     }
 
     buildSearchableOptions {
         enabled = false
     }
 
-    runIde {
-        maxHeapSize = "2g"
-    }
-
     compileJava {
-        options.release.set(17)
+        options.release.set(11)
     }
 }
