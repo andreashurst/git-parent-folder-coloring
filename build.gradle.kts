@@ -1,4 +1,3 @@
-# build.gradle.kts (FINAL VERSION)
 plugins {
     id("java")
     id("org.jetbrains.intellij") version "1.13.3"
