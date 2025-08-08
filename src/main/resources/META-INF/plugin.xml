@@ -1,0 +1,19 @@
+<idea-plugin>
+    <id>com.example.gitfolders</id>
+    <n>Git Parent Folder Coloring</n>
+    <version>1.2.0</version>
+    <vendor>Andreas Hurst</vendor>
+    
+    <description><![CDATA[
+    Colors parent folders in project tree when they contain Git-modified files.
+    ]]></description>
+    
+    <idea-version since-build="223"/>
+    
+    <depends>com.intellij.modules.platform</depends>
+    <depends>Git4Idea</depends>
+    
+    <extensions defaultExtensionNs="com.intellij">
+        <projectViewNodeDecorator implementation="com.example.gitparentfoldercoloring.GitParentFolderColorProvider"/>
+    </extensions>
+</idea-plugin>
