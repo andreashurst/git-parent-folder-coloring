@@ -6,6 +6,7 @@
     
     <description><![CDATA[
     Colors parent folders in project tree when they contain Git-modified files.
+    Makes it easy to see which directories have changes at a glance.
     ]]></description>
     
     <idea-version since-build="223"/>
@@ -14,6 +15,6 @@
     <depends>Git4Idea</depends>
     
     <extensions defaultExtensionNs="com.intellij">
-        <projectViewNodeDecorator implementation="com.example.gitparentfoldercoloring.GitParentFolderColorProvider"/>
+        <projectViewNodeDecorator implementation="com.example.gitparentfoldercoloring.SimpleGitDecorator"/>
     </extensions>
 </idea-plugin>
