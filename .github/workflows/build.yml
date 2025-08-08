@@ -3,15 +3,18 @@ name: Build Plugin
 on:
   push:
     branches: [ main ]
+  release:
+    types: [ published ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
     
-    - name: Set up JDK 17
+    - name: Setup Java 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
@@ -25,8 +28,17 @@ jobs:
     - name: Build Plugin
       run: gradle buildPlugin
     
-    - name: Upload Plugin
+    - name: Upload Plugin Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: plugin-zip
+        name: git-parent-folder-coloring-plugin
         path: build/distributions/*.zip
+        retention-days: 30
+    
+    - name: Upload to Release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v2
+      with:
+        files: build/distributions/*.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
