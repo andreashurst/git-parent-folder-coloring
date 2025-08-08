@@ -45,3 +45,16 @@ tasks {
         options.release.set(17)
     }
 }
+
+buildCache {
+    local {
+        isEnabled = System.getenv("CI") == null
+        directory = File(gradle.gradleUserHomeDir, "build-cache-gu")
+        removeUnusedEntriesAfterDays = 15
+    }
+    remote<HttpBuildCache> {
+        isEnabled = System.getenv("CI") != null
+        isPush = System.getenv("CI") != null
+        setUrl("$gradleEnterpriseUrl/cache/")
+    }
+}
